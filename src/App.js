@@ -1,25 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  state = {
+    numSides: 0,
+  };
+
+  handleChange = event => {
+    this.setState({
+      numSides: event.target.value,
+    });
+  };
+
   render() {
+    const numSides = this.state.numSides;
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <select onChange={this.handleChange} value={numSides}>
+          <option value={0}>Select a Dice</option>
+          <option value={4}>D4</option>
+          <option value={6}>D6</option>
+          <option value={8}>D8</option>
+          <option value={10}>D10</option>
+          <option value={12}>D12</option>
+          <option value={20}>D20</option>
+        </select>
       </div>
     );
   }
