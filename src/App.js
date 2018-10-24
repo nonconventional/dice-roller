@@ -16,7 +16,7 @@ class App extends Component {
     });
   };
 
-  handleClick = event => {
+  handleRollClick = event => {
     event.preventDefault();
 
     const { numDice, numSides } = this.state;
@@ -30,6 +30,12 @@ class App extends Component {
     this.setState({ diceRolls });
   };
 
+  handleClearClick = event => {
+    event.preventDefault();
+
+    this.setState({ diceRolls: [] });
+  };
+
   render() {
     const numDice = this.state.numDice;
     const numSides = this.state.numSides;
@@ -39,31 +45,38 @@ class App extends Component {
 
     return (
       <div className="App">
-        <select name="numSides" onChange={this.handleChange} value={numSides}>
-          <option value={0}>Select a Dice</option>
-          <option value={4}>D4</option>
-          <option value={6}>D6</option>
-          <option value={8}>D8</option>
-          <option value={10}>D10</option>
-          <option value={12}>D12</option>
-          <option value={20}>D20</option>
-          <option value={100}>D100</option>
-        </select>
-        <br />
-        <label htmlFor="numDice">
-          {'Please Enter number of Dice you would like to roll:'}
-        </label>
-        <input
-          id="numDice"
-          name="numDice"
-          min="1"
-          max="10000"
-          onChange={this.handleChange}
-          type="number"
-          value={numDice}
-        />
-        <br />
-        <button onClick={this.handleClick}>{'Roll the Dice! 😊'}</button>
+        <form>
+          <select name="numSides" onChange={this.handleChange} value={numSides}>
+            <option value={0}>Select a Dice</option>
+            <option value={4}>D4</option>
+            <option value={6}>D6</option>
+            <option value={8}>D8</option>
+            <option value={10}>D10</option>
+            <option value={12}>D12</option>
+            <option value={20}>D20</option>
+            <option value={100}>D100</option>
+          </select>
+          <br />
+          <label htmlFor="numDice">
+            {'Please Enter number of Dice you would like to roll:'}
+          </label>
+          <input
+            id="numDice"
+            name="numDice"
+            min="1"
+            max="10000"
+            onChange={this.handleChange}
+            type="number"
+            value={numDice}
+          />
+          <br />
+          <button type="submit" onClick={this.handleRollClick}>
+            {'Roll the Dice! 😊'}
+          </button>
+          <button onClick={this.handleClearClick}>
+            {'Clear previous rolls 😡'}
+          </button>
+        </form>
         <br />
         {diceRolls.length > 0 && (
           <React.Fragment>
