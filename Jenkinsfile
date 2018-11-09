@@ -19,7 +19,9 @@ pipeline {
       }
 
       steps {
-        sh 'yarn deploy'
+        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+          sh 'yarn deploy'
+        }
       }
     }
   }
